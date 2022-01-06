@@ -61,16 +61,13 @@ export class LocalProvider extends BaseProvider {
   getLoginRoute(server: FastifyInstance, opts: any): RouteOptions {
     return {
       method: 'POST',
-      //@ts-ignore
       url: `/${this.getRoutePrefixNoPrePostSlash(server)}/login`,
       preHandler: fastifyPassport.authenticate('local', { scope: opts.scope }),
       handler: async (req, res) => {
-        return {loggedIn: true}
+        return { loggedIn: true }
       },
       schema: {
-        //@ts-ignore
-
-        tags: ['Google Auth'],
+        tags: ['Local Auth'],
         summary: `Login for model '${this.modelName}' with provider ${this.providerName}`,
         description: `POST your login data (username, password) to this url`,
         body: {
@@ -87,19 +84,13 @@ export class LocalProvider extends BaseProvider {
   getLogoutRoute(server: FastifyInstance, opts: any): RouteOptions {
     return {
       method: 'GET',
-      //@ts-ignore
-
       url: `/${this.getRoutePrefixNoPrePostSlash(server)}/logout`,
-      //@ts-ignore
-
       handler: async (req, res) => {
         await req.logOut()
-        return {loggedIn: false}
+        return { loggedIn: false }
       },
       schema: {
-        //@ts-ignore
-
-        tags: ['Google Auth'],
+        tags: ['Local Auth'],
         summary: `Logout for model '${this.modelName}' with provider ${this.providerName}`,
         description: `Getting this route will remove the session cookie`,
       },
@@ -108,8 +99,6 @@ export class LocalProvider extends BaseProvider {
 
   getCallbackRoute(server: FastifyInstance, opts: any): RouteOptions {
     const callbackRoute = `/${this.getRoutePrefixNoPrePostSlash(
-      //@ts-ignore
-
       server,
     )}/callback`;
     return {
@@ -124,11 +113,9 @@ export class LocalProvider extends BaseProvider {
         res.redirect(opts.successRedirectURL);
       },
       schema: {
-        //@ts-ignore
-
-        tags: ['Google Auth'],
+        tags: ['Local Auth'],
         summary: `Callback Route for model '${this.modelName}' with provider ${this.providerName}`,
-        description: `Google redirects to this URL with the user's details. This route must be specified in the google callback URLs`,
+        description: `This URL just redirects directly to the the successRedirectURL`,
       },
     };
   }

@@ -18,7 +18,9 @@
     "@ezbackend/common": "^0.2.1",
     "@ezbackend/core": "^0.2.1",
     "@ezbackend/cors": "^0.2.1",
-    "@ezbackend/utils": "^0.2.1"
+    "@ezbackend/utils": "^0.2.1",
+    "argon2": "^0.28.3",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "@ezbackend/db-ui": "^0.2.1",
